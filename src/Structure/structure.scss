@@ -1,0 +1,125 @@
+@import '../normalize';
+
+.table {
+    width: 100%;
+    margin: 25px 0;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    @include noselect();
+
+    .bigCell {
+        width: 250px;
+    }
+
+    .actions {
+        width: auto;
+        position: relative;
+        cursor: pointer;
+        font-size: 30px;
+    }
+
+    .table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px 15px;
+    }
+
+
+    th {
+        text-align: center;
+    }
+
+    thead th {
+        background-color: #a18a3e56;
+    }
+
+    tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    tbody td {
+        justify-content: center;
+        text-align: center;
+        position: relative;
+    }
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.noFound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font: bold;
+    height: 430px;
+}
+
+.action__popup {
+    display: none;
+    position: absolute;
+    right: 0;
+    left: 0;
+    background: #ffffff;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px 0;
+    width: 100px;
+    font-size: 12px;
+    z-index: 999;
+
+    ul {
+        overflow: hidden;
+        margin: 0;
+        padding: 0px;
+
+        li {
+            font-size: 15px;
+            padding: 10px 12px;
+            cursor: pointer;
+
+            &.active,
+            &:hover {
+                background: rgba(254, 95, 30, 0.05);
+            }
+
+            &.active {
+                font-weight: bold;
+                color: orange;
+            }
+        }
+    }
+
+    &.active {
+        display: block;
+    }
+
+    .pagination {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
