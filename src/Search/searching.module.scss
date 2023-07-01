@@ -1,6 +1,8 @@
 .root{
     position: relative;
     padding: 20px 0;
+    display: flex;
+    align-items: center;
 }
 
 .input{
@@ -27,3 +29,17 @@ svg{
 }
 
 
+.checkbox{
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    span{
+        font-weight: 600;
+        font-size: 20px;
+    }
+    input{
+        margin-left: 10px;
+        width: 20px;
+        height: 20px;
+    }
+}

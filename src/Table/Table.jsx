@@ -5,7 +5,7 @@ import Search from '../Search/Search';
 const Table = () => {
     const [cars, setCars] = React.useState([]);
     const [searchValue, setSearchValue] = React.useState('');
-
+    const [isAvailable, setIsAvailable] = React.useState('All');
     React.useEffect(() => {
         (async () => {
             await fetchItem();
@@ -24,8 +24,8 @@ const Table = () => {
     }
     return (
         <div className='container'>
-            <Search searchValue={searchValue} setSearchValue={setSearchValue} />
-            <Structure searchValue={searchValue} cars={cars} setCars ={setCars} />
+            <Search  setIsAvailable = {setIsAvailable} searchValue={searchValue} setSearchValue={setSearchValue} />
+            <Structure isAvailable = {isAvailable} searchValue={searchValue} cars={cars} setCars={setCars} />
         </div>
     )
 }
