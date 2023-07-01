@@ -2,7 +2,7 @@ import React from 'react';
 import { addItem } from '../utils';
 import style from './modal.module.scss';
 const AddElement = ({ setIsAddCar, cars, setCars }) => {
-    const [isAvailable, setIsAvailable] = React.useState(false);
+    const [isAvailable, setIsAvailable] = React.useState(false); 
     const [newData, setNewData] = React.useState({
         car: '',
         model: '',
@@ -10,7 +10,7 @@ const AddElement = ({ setIsAddCar, cars, setCars }) => {
         color: '',
         year: '',
         price: '',
-        availability: isAvailable,
+        availability: false,
     });
 
     const handleSubmit = (e) => {
@@ -29,15 +29,36 @@ const AddElement = ({ setIsAddCar, cars, setCars }) => {
         addItem('cars', newCar);
         setIsAddCar(false);
     };
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        let val = value;
-        if (name === 'availability') {
-            val = Number(value);
+    const handleChange = (e)=>{
+        const {name,value} = e.target;
+        console.log(value);
+        if (name === 'availability'){
+            setIsAvailable(!value);
         }
-        setNewData((prevData) => ({ ...prevData, [name]: val }));
-    };
+        console.log(isAvailable);
+        setNewData((prevData)=>({...prevData, [name]:value}))
+    }
+    // const handleChange = (e) => {
+    //     const { name, value, checked} = e.target;
+    //     console.log(e);
+    //     let val = value;
+    //     if (name === 'availability') {
+    //         setIsAvailable(checked);
+    //         val = checked; 
+    //     }
+    //     setNewData(prevData=>({...prevData, [name]:value}))
+    // };
+    // const handleChange = (e)=>{
+    //     const {name, value} = e.target;
+    //     let val = value;
+    //     if(name === 'availability'){
+    //         val = Number(value)
+    //         setIsAvailable(val);
+    //     }
+    //     console.log(val);   
+    //     setNewData(prevData=>({...prevData, [name]:val}))
+    // }
+
 
 
     return (
@@ -103,11 +124,13 @@ const AddElement = ({ setIsAddCar, cars, setCars }) => {
                             />
                         </li>
                         <li>
-                            <span>Select on availability</span>
+                            <h1>Select on availability</h1>
                             <input
                                 onChange={handleChange}
                                 type='checkbox'
-                                value='1'
+                                name="availability"
+                                // checked={isAvailable}
+                                value={!isAvailable}
                             ></input>
                         </li>
                         <li>

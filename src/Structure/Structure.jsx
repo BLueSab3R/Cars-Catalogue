@@ -7,7 +7,6 @@ const Structure = ({ cars, searchValue, isAvailable }) => {
     const [isDelete, setIsDelete] = React.useState(false);
     const [isEdit, setIsEdit] = React.useState(false);
     const [currentPage, setCurrentPage] = React.useState(0);
-    console.log(isAvailable);
     const handleOpenActions = (e) => {
         const actionButton = e.target;
         const actionDropdown = actionButton.parentNode.querySelector('.action__popup');

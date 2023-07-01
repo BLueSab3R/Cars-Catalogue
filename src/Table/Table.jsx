@@ -23,23 +23,23 @@ const Table = () => {
                 if (response.ok) {
                     const data = await response.json();
                     setCars(data.cars);
-                    localStorage.setItem('cars', JSON.stringify(cars));
+                    localStorage.setItem('cars', JSON.stringify(data.cars)); 
                 }
             } else {
-                setCars(localCars)
+                setCars(localCars);
             }
         } catch (error) {
             console.log('Error fetching items: ' + error);
         }
-        console.log(cars);
-    }
+    };
+
     return (
         <div className='container'>
             <div className="container__top">
                 <Search setIsAvailable={setIsAvailable} searchValue={searchValue} setSearchValue={setSearchValue} />
                 <button onClick={() => setIsAddCar(!isAddCar)}>ADD CAR</button>
                 {isAddCar &&
-                    <AddElement setCars = {setCars} cars = {cars} setIsAddCar={setIsAddCar} />
+                    <AddElement setCars={setCars} cars={cars} setIsAddCar={setIsAddCar} />
                 }
             </div>
             <Structure isAvailable={isAvailable} searchValue={searchValue} cars={cars} setCars={setCars} />
