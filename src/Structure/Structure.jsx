@@ -17,14 +17,14 @@ const Structure = ({ cars, searchValue }) => {
         const searchWord = searchValue.toLowerCase().split(' ');
         return searchWord.some((word) => {
             return (
-                obj.car.toLowerCase().includes(word) ||
-                obj.car_model.toLowerCase().includes(word) ||
-                obj.car_color.toLowerCase().includes(word) ||
-                obj.price.toLowerCase().includes(word) ||
-                obj.car_model_year.toString().includes(searchValue) ||
-                obj.car_vin.toString().toLowerCase().includes(word) ||
-                obj.car_vin.toString().includes(word) ||
-                obj.price.includes(word)
+                obj.car.toLowerCase().includes(word.toLowerCase()) ||
+                obj.car_model.toLowerCase().includes(word.toLowerCase()) ||
+                obj.car_color.toLowerCase().includes(word.toLowerCase()) ||
+                obj.price.toLowerCase().includes(word.toLowerCase()) ||
+                obj.car_model_year.toString().includes(word.toLowerCase()) ||
+                obj.car_vin.toString().toLowerCase().includes(word.toLowerCase()) ||
+                obj.car_vin.toString().includes(word.toLowerCase()) ||
+                obj.price.includes(word.toLowerCase())
             )
         })
     }).reverse();
