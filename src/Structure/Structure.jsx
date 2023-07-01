@@ -34,12 +34,7 @@ const Structure = ({ cars, searchValue, isAvailable }) => {
         else if (isAvailable === 'Available') {
             return obj.availability === true;
         }
-    })
-        .reverse();
-    const filteredByAvailable = isAvailable === 'available' ?
-        filteredCars.filter(obj => obj.availability == true)
-        :
-        filteredCars;
+    }).reverse();
     const pageCount = Math.ceil(filteredCars.length / itemsPerPage);
     const offset = currentPage * itemsPerPage;
     const currentItems = filteredCars.slice(offset, offset + itemsPerPage);
