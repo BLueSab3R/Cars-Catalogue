@@ -28,10 +28,10 @@ const Table = () => {
             } else {
                 setCars(localCars)
             }
-
         } catch (error) {
             console.log('Error fetching items: ' + error);
         }
+        console.log(cars);
     }
     return (
         <div className='container'>
@@ -39,7 +39,7 @@ const Table = () => {
                 <Search setIsAvailable={setIsAvailable} searchValue={searchValue} setSearchValue={setSearchValue} />
                 <button onClick={() => setIsAddCar(!isAddCar)}>ADD CAR</button>
                 {isAddCar &&
-                    <AddElement setIsAddCar={setIsAddCar} />
+                    <AddElement setCars = {setCars} cars = {cars} setIsAddCar={setIsAddCar} />
                 }
             </div>
             <Structure isAvailable={isAvailable} searchValue={searchValue} cars={cars} setCars={setCars} />
