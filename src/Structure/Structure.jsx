@@ -1,7 +1,7 @@
 import React from 'react'
 import Pagination from './Pagination/Pagination';
 import './structure.scss'
-const Structure = ({ cars, searchValue}) => {
+const Structure = ({ cars, searchValue }) => {
     const itemsPerPage = 10;
     const [itemId, setItemId] = React.useState(0);
     const [isDelete, setIsDelete] = React.useState(false);
@@ -14,19 +14,19 @@ const Structure = ({ cars, searchValue}) => {
         actionDropdown.classList.toggle('active');
     }
     const filteredCars = cars.filter((obj) => {
-        if (
-            obj.car.toLowerCase().includes(searchValue.toLowerCase()) ||
-            obj.car_model.toLowerCase().includes(searchValue.toLowerCase()) ||
-            obj.car_color.toLowerCase().includes(searchValue.toLowerCase()) ||
-            obj.price.toLowerCase().includes(searchValue.toLowerCase()) ||
-            obj.car_model_year.toString().includes(searchValue) ||
-            obj.car_vin.toString().toLowerCase().includes(searchValue.toLowerCase()) ||
-            obj.car_vin.toString().includes(searchValue) ||
-            obj.price.includes(searchValue)
-        ) {
-            return true;
-        }
-        return false;
+        const searchWord = searchValue.toLowerCase().split(' ');
+        return searchWord.some((word) => {
+            return (
+                obj.car.toLowerCase().includes(word) ||
+                obj.car_model.toLowerCase().includes(word) ||
+                obj.car_color.toLowerCase().includes(word) ||
+                obj.price.toLowerCase().includes(word) ||
+                obj.car_model_year.toString().includes(searchValue) ||
+                obj.car_vin.toString().toLowerCase().includes(word) ||
+                obj.car_vin.toString().includes(word) ||
+                obj.price.includes(word)
+            )
+        })
     }).reverse();
     const pageCount = Math.ceil(filteredCars.length / itemsPerPage);
     const offset = currentPage * itemsPerPage;
