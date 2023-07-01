@@ -16,7 +16,7 @@ const Search = ({ searchValue, setSearchValue, setIsAvailable }) => {
                 placeholder='Find a car...'>
             </input>
             <FilterByAvailable setIsAvailable={setIsAvailable} />
-
+            
         </div>
     )
 }
