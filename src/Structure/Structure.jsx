@@ -13,11 +13,13 @@ const Structure = ({ cars, searchValue, isAvailable, updateCars }) => {
     const handleEdit = (id) => {
         setIsEdit(!isEdit);
         setItemId(id);
+        closeDropDowns();
     }
 
     const handleDelete = (id) => {
         setIsDelete(!isDelete);
         setItemId(id);
+        closeDropDowns();
     }
 
     const filteredCars = cars.filter((obj) => {
@@ -54,7 +56,6 @@ const Structure = ({ cars, searchValue, isAvailable, updateCars }) => {
         const actionButton = e.target;
         const actionDropdown = actionButton.parentNode.querySelector('.action__popup');
         actionDropdown.classList.toggle('active');
-
         const clickCatcher = document.querySelector('.bgClickCatcher');
         clickCatcher.classList.toggle('active');
         const handleCloseDropdown = () => {
@@ -63,6 +64,14 @@ const Structure = ({ cars, searchValue, isAvailable, updateCars }) => {
             clickCatcher.removeEventListener('click', handleCloseDropdown);
         }
         clickCatcher.addEventListener('click', handleCloseDropdown);
+    }
+    const closeDropDowns = () => {
+        const clickCatcher = document.querySelector('.bgClickCatcher');
+        clickCatcher.classList.remove('active');
+        const dropDowns = document.querySelectorAll('.action__popup');
+        dropDowns.forEach((el) => {
+            el.classList.remove('active');
+        })
     }
 
     return (
