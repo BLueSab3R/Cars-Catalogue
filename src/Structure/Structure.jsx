@@ -1,16 +1,22 @@
 import React from 'react'
+import ConfirmDeleteModal from '../Modals/ConfirmDeleteModal';
 import Pagination from './Pagination/Pagination';
 import './structure.scss'
 const Structure = ({ cars, searchValue, isAvailable }) => {
     const itemsPerPage = 10;
     const [itemId, setItemId] = React.useState(0);
-    const [isDelete, setIsDelete] = React.useState(false);
     const [isEdit, setIsEdit] = React.useState(false);
+    const [isDelete, setIsDelete] = React.useState(false);
     const [currentPage, setCurrentPage] = React.useState(0);
     const handleOpenActions = (e) => {
         const actionButton = e.target;
         const actionDropdown = actionButton.parentNode.querySelector('.action__popup');
         actionDropdown.classList.toggle('active');
+    }
+    const handleDelete = (id) => {
+        setIsDelete(!isDelete);
+        setItemId(id);
+
     }
     const filteredCars = cars.filter((obj) => {
         const searchWord = searchValue.toLowerCase().split(' ');
@@ -71,8 +77,8 @@ const Structure = ({ cars, searchValue, isAvailable }) => {
                                     <span onClick={handleOpenActions} className="action">...</span>
                                     <div className="action__popup">
                                         <ul>
-                                            <li >edit </li>
-                                            <li>delete</li>
+                                            <li>edit </li>
+                                            <li onClick={() => handleDelete(car.id)}>delete</li>
                                         </ul>
                                     </div>
                                 </td>
@@ -93,7 +99,11 @@ const Structure = ({ cars, searchValue, isAvailable }) => {
                     pageCount={pageCount}
                 />
             </div>
+            {isDelete &&
+                <ConfirmDeleteModal itemId={itemId} setIsDelete={setIsDelete} />}
         </div>
+
+
     )
 }
 

@@ -1,0 +1,50 @@
+.modal__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    align-items: center;
+    background-color: #fff;
+    width: 400px;
+    height: auto;
+    padding: 20px;
+    z-index: 10000;
+    border-radius: 10px;
+
+    h4 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .actionButtons {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 15px; 
+    }
+
+
+    button {
+        margin-top: 15px;
+        font-size: 20px;
+        transition: transform 0.2s ease-in-out;
+        width: 150px;
+        &:first-child{
+            margin-right: 25px;
+        }
+    }
+
+}

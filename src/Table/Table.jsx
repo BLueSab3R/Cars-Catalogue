@@ -23,7 +23,7 @@ const Table = () => {
                 if (response.ok) {
                     const data = await response.json();
                     setCars(data.cars);
-                    localStorage.setItem('cars', JSON.stringify(data.cars)); 
+                    localStorage.setItem('cars', JSON.stringify(data.cars));
                 }
             } else {
                 setCars(localCars);
@@ -41,6 +41,7 @@ const Table = () => {
                 {isAddCar &&
                     <AddElement setCars={setCars} cars={cars} setIsAddCar={setIsAddCar} />
                 }
+       
             </div>
             <Structure isAvailable={isAvailable} searchValue={searchValue} cars={cars} setCars={setCars} />
         </div>

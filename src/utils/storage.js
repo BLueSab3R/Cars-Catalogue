@@ -7,3 +7,11 @@ export const addItem = (title, data) => {
     currItem.push(data);
     localStorage.setItem(title, JSON.stringify(currItem));
 }
+
+
+export const deleteItem = (title, id) => {
+    const currItem = getItems(title) || []
+    const deletedItem = currItem.filter(item => item.id !== id);
+    console.log(id);
+    localStorage.setItem(title, JSON.stringify(deletedItem));
+}
