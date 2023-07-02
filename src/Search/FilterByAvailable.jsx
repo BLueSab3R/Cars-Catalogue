@@ -5,16 +5,15 @@ const FilterByAvailable = ({ setIsAvailable }) => {
     const [counter, setCounter] = React.useState(0);
     const handleIsAvailable = (e) => {
         setCounter(counter + 1);
-        console.log(counter);
-        if (counter %2 !== 1) {
+        if (counter % 2 !== 1) {
             setIsAvailable(e.target.value);
-        }else{
+        } else {
             setIsAvailable('All')
         }
     }
     return (
         <div className={styles.checkbox}>
-            <span>Select on availability</span>
+            <span>Show only available</span>
             <input
                 onClick={handleIsAvailable}
                 type='checkbox'

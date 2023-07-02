@@ -15,10 +15,13 @@ const Pagination = ({ currentPage, onPageChange, pageCount }) => {
                 nextLabel=">"
                 previousLabel="<"
                 onPageChange={handlePageClick}
-                pageRangeDisplayed={12}
+                pageRangeDisplayed={10}
                 pageCount={pageCount}
                 renderOnZeroPageCount={null}
                 forcePage={currentPage}
+                marginPagesDisplayed={0}
+                activeClassName='activePagination'
+                disabledClassName='disabledPagination'
             />
         </div>
     );

@@ -1,4 +1,7 @@
 .root {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
     li {
         display: inline-block;
         margin-bottom: 10px;
@@ -21,14 +24,17 @@
             }
         }
     }
+}
 
-    :global {
-        .selected {
-            a {
-                background-color: #009879;
-                color: #fff;
-            }
+.activePagination {
+    a {
+        background-color: #009879;
+        color: #fff !important;
+    }
+}
 
-        }
+.disabledPagination {
+    a {
+        visibility: hidden;
     }
 }

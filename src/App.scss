@@ -13,6 +13,21 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.bgClickCatcher {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  z-index: 99;
+
+  &.active {
+    display: block;
+  }
+}
+
 button {
   cursor: pointer;
   text-align: center;

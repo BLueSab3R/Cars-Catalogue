@@ -4,11 +4,19 @@
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.modal__wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
 }
 
 .modal {
@@ -33,16 +41,16 @@
     .actionButtons {
         display: flex;
         justify-content: space-around;
-        margin-top: 15px; 
+        margin-top: 15px;
     }
-
 
     button {
         margin-top: 15px;
         font-size: 20px;
         transition: transform 0.2s ease-in-out;
         width: 150px;
-        &:first-child{
+
+        &:first-child {
             margin-right: 25px;
         }
     }

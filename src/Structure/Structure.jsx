@@ -2,22 +2,24 @@ import React from 'react'
 import ConfirmDeleteModal from '../Modals/ConfirmDeleteModal';
 import Pagination from './Pagination/Pagination';
 import './structure.scss'
-const Structure = ({ cars, searchValue, isAvailable }) => {
+import EditCarData from '../Modals/EditCarData';
+const Structure = ({ cars, searchValue, isAvailable, updateCars }) => {
     const itemsPerPage = 10;
     const [itemId, setItemId] = React.useState(0);
     const [isEdit, setIsEdit] = React.useState(false);
     const [isDelete, setIsDelete] = React.useState(false);
     const [currentPage, setCurrentPage] = React.useState(0);
-    const handleOpenActions = (e) => {
-        const actionButton = e.target;
-        const actionDropdown = actionButton.parentNode.querySelector('.action__popup');
-        actionDropdown.classList.toggle('active');
+
+    const handleEdit = (id) => {
+        setIsEdit(!isEdit);
+        setItemId(id);
     }
+
     const handleDelete = (id) => {
         setIsDelete(!isDelete);
         setItemId(id);
-
     }
+
     const filteredCars = cars.filter((obj) => {
         const searchWord = searchValue.toLowerCase().split(' ');
         return searchWord.some((word) => {
@@ -47,6 +49,22 @@ const Structure = ({ cars, searchValue, isAvailable }) => {
     const handlePageClick = (selectedPage) => {
         setCurrentPage(selectedPage.selected);
     };
+
+    const handleOpenActions = (e) => {
+        const actionButton = e.target;
+        const actionDropdown = actionButton.parentNode.querySelector('.action__popup');
+        actionDropdown.classList.toggle('active');
+
+        const clickCatcher = document.querySelector('.bgClickCatcher');
+        clickCatcher.classList.toggle('active');
+        const handleCloseDropdown = () => {
+            actionDropdown.classList.toggle('active');
+            clickCatcher.classList.toggle('active');
+            clickCatcher.removeEventListener('click', handleCloseDropdown);
+        }
+        clickCatcher.addEventListener('click', handleCloseDropdown);
+    }
+
     return (
         <div>
             {filteredCars.length > 0 ?
@@ -54,12 +72,12 @@ const Structure = ({ cars, searchValue, isAvailable }) => {
                     <thead>
                         <tr className="table-row table-header">
                             <th className="table-cell">Company</th>
-                            <th className="table-cell">Car Model</th>
-                            <th className="table-cell">Car Color</th>
-                            <th className="table-cell">Car Model Year</th>
-                            <th className="table-cell bigCell">Car VIN</th>
+                            <th className="table-cell">Model</th>
+                            <th className="table-cell bigCell">VIN</th>
+                            <th className="table-cell">Color</th>
+                            <th className="table-cell">Year</th>
                             <th className="table-cell">Price</th>
-                            <th className="table-cell">Availability</th>
+                            <th className="table-cell">Is Available</th>
                             <th className="table-cell">Actions</th>
                         </tr>
                     </thead>
@@ -68,18 +86,20 @@ const Structure = ({ cars, searchValue, isAvailable }) => {
                             <tr key={car.id} className="table-row">
                                 <td className="table-cell">{car.car}</td>
                                 <td className="table-cell">{car.car_model}</td>
+                                <td className="table-cell">{car.car_vin}</td>
                                 <td className="table-cell">{car.car_color}</td>
                                 <td className="table-cell">{car.car_model_year}</td>
-                                <td className="table-cell">{car.car_vin}</td>
                                 <td className="table-cell">{car.price}</td>
                                 <td className="table-cell">{car.availability ? 'Yes' : 'No'}</td>
                                 <td className="table-cell actions">
-                                    <span onClick={handleOpenActions} className="action">...</span>
-                                    <div className="action__popup">
-                                        <ul>
-                                            <li>edit </li>
-                                            <li onClick={() => handleDelete(car.id)}>delete</li>
-                                        </ul>
+                                    <div className="actions__wrapper">
+                                        <span onClick={handleOpenActions} className="action__button">...</span>
+                                        <div className="action__popup">
+                                            <ul>
+                                                <li onClick={() => handleEdit(car.id)}>Edit </li>
+                                                <li onClick={() => handleDelete(car.id)}>Delete</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -100,10 +120,10 @@ const Structure = ({ cars, searchValue, isAvailable }) => {
                 />
             </div>
             {isDelete &&
-                <ConfirmDeleteModal itemId={itemId} setIsDelete={setIsDelete} />}
+                <ConfirmDeleteModal itemId={itemId} setIsDelete={setIsDelete} updateCars={updateCars} />}
+            {isEdit &&
+                <EditCarData cars={cars} itemId={itemId} setIsEdit={setIsEdit} updateCars={updateCars} />}
         </div>
-
-
     )
 }
 

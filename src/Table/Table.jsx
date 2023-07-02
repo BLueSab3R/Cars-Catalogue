@@ -1,37 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Structure from '../Structure/Structure';
 import '../App.scss'
 import Search from '../Search/Search';
 import AddElement from '../Modals/AddElement';
-import { getItems } from '../utils';
+import { getItems, setItems } from '../utils';
+import { ENDPOINTS } from '../constants';
+import { Loader } from '../Loader/Loader';
+
 const Table = () => {
-    const [cars, setCars] = React.useState([]);
-    const [searchValue, setSearchValue] = React.useState('');
-    const [isAvailable, setIsAvailable] = React.useState('All');
-    const [isAddCar, setIsAddCar] = React.useState(false);
+    const [cars, setCars] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+    const [isAvailable, setIsAvailable] = useState('All');
+    const [isAddCar, setIsAddCar] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     React.useEffect(() => {
+        setIsLoading(true);
         (async () => {
-            await fetchItem();
-        })();
+            await fetchCars();
+            loadLocalCars();
+        })().finally(() => {
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 300);
+        });
     }, []);
-    const fetchItem = async () => {
+
+    const fetchCars = async () => {
         try {
-            const localCars = JSON.parse(localStorage.getItem('cars')) || [];
+            const localCars = getItems('cars');
             if (localCars.length === 0) {
-                const response = await fetch('https://myfakeapi.com/api/cars/');
+                const response = await fetch(ENDPOINTS.CARS);
                 if (response.ok) {
                     const data = await response.json();
-                    setCars(data.cars);
-                    localStorage.setItem('cars', JSON.stringify(data.cars));
+                    setItems('cars', data.cars);
                 }
-            } else {
-                setCars(localCars);
             }
         } catch (error) {
             console.log('Error fetching items: ' + error);
         }
     };
+
+    const loadLocalCars = () => {
+        const localCars = getItems('cars');
+        setCars(localCars);
+    }
 
     return (
         <div className='container'>
@@ -39,11 +52,15 @@ const Table = () => {
                 <Search setIsAvailable={setIsAvailable} searchValue={searchValue} setSearchValue={setSearchValue} />
                 <button onClick={() => setIsAddCar(!isAddCar)}>ADD CAR</button>
                 {isAddCar &&
-                    <AddElement setCars={setCars} cars={cars} setIsAddCar={setIsAddCar} />
+                    <AddElement setCars={setCars} cars={cars} setIsAddCar={setIsAddCar} updateCars={loadLocalCars} />
                 }
-       
+
             </div>
-            <Structure isAvailable={isAvailable} searchValue={searchValue} cars={cars} setCars={setCars} />
+            {!isLoading ? (
+                <Structure isAvailable={isAvailable} searchValue={searchValue} cars={cars} setCars={setCars} updateCars={loadLocalCars} />
+            ) : (
+                <Loader />
+            )}
         </div>
     )
 }

@@ -5,12 +5,13 @@ import Table from './Table/Table';
 function App() {
   return (
     <div className="wrapper">
-      <div className="contaier">
+      <div className="bgClickCatcher"></div>
+      <div className="container">
         <div className="container__top">
-          <Header/>
+          <Header />
         </div>
         <div className="table">
-          <Table/>
+          <Table />
         </div>
       </div>
     </div>
